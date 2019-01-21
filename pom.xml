@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>bawag</groupId>
+    <artifactId>bawag</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>acceptance-tests-common</module>
+        <module>ui-acceptance-tests</module>
+        <module>api-acceptance-tests</module>
+        <module>performance-tests</module>
+        <module>security-acceptance-tests</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <properties>
+        <cucumber.version>4.0.0</cucumber.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
+        <java.version>1.8</java.version>
+
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <compilerArgument>-Werror</compilerArgument>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>default</id>
+            <modules>
+                <module>acceptance-tests-common</module>
+                <module>ui-acceptance-tests</module>
+                <module>api-acceptance-tests</module>
+                <module>performance-tests</module>
+                <module>security-acceptance-tests</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>ui-acceptance-tests</id>
+            <modules>
+                <module>acceptance-tests-common</module>
+                <module>ui-acceptance-tests</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>api-acceptance-tests</id>
+            <modules>
+                <module>acceptance-tests-common</module>
+                <module>api-acceptance-tests</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>performance-tests</id>
+            <modules>
+                <module>performance-tests</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>security-acceptance-tests</id>
+            <modules>
+                <module>acceptance-tests-common</module>
+                <module>security-acceptance-tests</module>
+            </modules>
+        </profile>
+    </profiles>
+</project>
